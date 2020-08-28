@@ -1,0 +1,17 @@
+<script>
+    $(function(){
+        $(".dels").click(function(){
+            if (!confirm("是否删除！")){
+                return false;
+            }
+        })
+
+        $("#select").change(function() {
+            /*  var option = $("#select option:selected").text();
+              $.post("/ShowArticle",{select:option},function(data){
+
+              });*/
+            $("#form").submit();
+        })
+    })
+</script>
