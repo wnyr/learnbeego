@@ -6,6 +6,7 @@ import (
 	"encoding/gob"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
+	"github.com/astaxie/beego/utils"
 	"github.com/gomodule/redigo/redis"
 	"math"
 	"path"
@@ -418,4 +419,22 @@ func (this *ArticleController) HandleAddType() {
 func (this *ArticleController) Logout() {
 	this.DelSession("userName")
 	this.Redirect("/Article/login", 302)
+}
+
+func (this *ArticleController) SendMail() {
+	config := `{"username":"beegotest@gmail.com","password":"xxxxxxxx","host":"smtp.gmail.com","prot":587}`
+	email := utils.NewEMail(config)
+	email.From = ""             //谁发
+	email.To = []string{""}     //发给谁
+	email.Subject = "beego测试邮件" //邮件标题
+	//email.Text = ""    //文本类容
+	email.HTML = "<a href='http://beego.me'>beego</a>" //HTML类容
+	err := email.Send()
+	if err != nil {
+		beego.Info("邮件发送错误:", err)
+		return
+	}
+
+	this.Ctx.WriteString("邮件发送成功！")
+
 }
