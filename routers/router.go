@@ -20,6 +20,8 @@ func init() {
 	beego.Router("/Article/AddArticleType", &controllers.ArticleController{}, "get:ShowAddType;post:HandleAddType")
 	//退出登陆
 	beego.Router("/Article/Logout", &controllers.ArticleController{}, "get:Logout")
+	//测试发邮件
+	beego.Router("/sendMail", &controllers.ArticleController{}, "get:SendMail")
 
 }
 
